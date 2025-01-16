@@ -1,0 +1,78 @@
+
+body {
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+                url('../images/bg-login.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    min-height: 100vh;
+}
+
+
+.login-container {
+    background-color: rgba(0, 0, 0, 0.75);
+    border-radius: 4px;
+    padding: 60px 68px 40px;
+    margin-top: 100px;
+    max-width: 450px;
+}
+
+.form-control {
+    background-color: #333;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    height: 50px;
+    padding: 16px 20px;
+    margin-bottom: 16px;
+}
+
+.form-control:focus {
+    background-color: #454545;
+    color: #fff;
+    box-shadow: none;
+}
+
+.btn-login {
+    background-color: #e50914;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 10px;
+    margin-top: 24px;
+}
+
+.btn-login:hover {
+    background-color: #f40612;
+}
+
+.form-check-label {
+    color: #b3b3b3;
+    font-size: 14px;
+}
+
+.help-text {
+    color: #b3b3b3;
+    font-size: 14px;
+    text-align: right;
+}
+
+.social-login {
+    color: #737373;
+    margin-top: 16px;
+}
+
+.signup-text {
+    color: #737373;
+    margin-top: 16px;
+}
+
+.signup-link {
+    color: #fff;
+    text-decoration: none;
+}
+
+.signup-link:hover {
+    text-decoration: underline;
+}
