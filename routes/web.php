@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -18,10 +19,15 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 
 
-Route::get('/', [AuthController::class, 'home'])->name('home')->middleware('auth');
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
-
-// halaman dashboard
-Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard')->middleware('auth', 'check.admin');
+// Halaman Utama (Home)
+Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth');
+Route::middleware('auth.redirect')->group(function () {
+    Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+    Route::post('/register', [AuthController::class, 'register'])->name('register');
+    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [AuthController::class, 'login']);
+});
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+Route::middleware(['auth', 'check.admin'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+});

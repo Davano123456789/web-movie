@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Register</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/login.css">
 </head>
@@ -12,19 +12,17 @@
         <div class="row justify-content-center">
             <div class="col-12 col-md-6 col-lg-6">
                 <div class="login-container">
-                    <h2 class="text-white mb-4">Sign In</h2>
-                                        <!-- Flash Message for Success -->
-                                        @if(session('success'))
-                                        <div class="alert alert-success">
-                                            {{ session('success') }}
-                                        </div>
-                                    @endif
-                    @if($errors->has('loginError'))
+                    <h2 class="text-white mb-4">Register</h2>
+                    {{-- @if($errors->any())
                         <div class="alert alert-danger">
-                            {{ $errors->first('loginError') }}
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
                         </div>
-                    @endif
-                    <form action="{{ route('login') }}" method="POST">
+                    @endif --}}
+                    <form action="{{ route('register') }}" method="POST">
                         @csrf
                         <div class="mb-3">
                             <input 
@@ -53,9 +51,9 @@
                                 </div>
                             @enderror
                         </div>
-                        <button type="submit" class="btn btn-login w-100">Sign In</button>
+                        <button type="submit" class="btn btn-login w-100">Register</button>
                         <div class="signup-text text-center mt-3">
-                            Don't have an account? <a href="{{ route('register') }}" class="signup-link">Sign up now</a>
+                            Already have an account? <a href="{{ route('login') }}" class="signup-link">Sign in now</a>
                         </div>
                     </form>
                 </div>
