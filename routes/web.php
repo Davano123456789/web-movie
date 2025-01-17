@@ -30,4 +30,11 @@ Route::middleware('auth.redirect')->group(function () {
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 Route::middleware(['auth', 'check.admin'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/movies', [DashboardController::class, 'movies'])->name('movies');
+    Route::get('/movies/add', [DashboardController::class, 'formMovie'])->name('movies.add');
+    Route::get('/movies/editMovie/{id}', [DashboardController::class, 'editMovie'])->name('movies.editMovie');
+    Route::put('/movies/editMovie/{id}', [DashboardController::class, 'updateMovie'])->name('movies.updateMovie');
+    Route::post('/movies/add', [DashboardController::class, 'addMovie'])->name('movies.add');
+    Route::delete('/movies/{id}', [DashboardController::class, 'destroy'])->name('movies.destroy');
+    Route::get('/movies/{id}', [DashboardController::class, 'show'])->name('movies.show');
 });
