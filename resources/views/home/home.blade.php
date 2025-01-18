@@ -16,7 +16,7 @@
               <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                   <a class="link-nav aktif" aria-current="page" href="#">Home</a>
-                  <a class="link-nav" aria-current="page" href="#">Movies</a>
+                  <a class="link-nav" aria-current="page" href="#movies">Movies</a>
                   <a class="link-nav" aria-current="page" href="#">About me</a>
                   <a class="link-nav" aria-current="page" href="#">Services</a>
                   <a class="link-nav logout" aria-current="page" href="{{ route('logout') }}">Logout</a>
@@ -43,7 +43,7 @@
 </div>
 
     </section>
-    <section class="list-movie pb-5 pt-4">
+    <section class="list-movie pb-5 pt-4" id="movies">
       <div class="search container">
         <div class="input-group">
             <span class="input-group-text">
@@ -64,11 +64,14 @@
       <div class="row g-4" id="movie-container">
           @foreach ($movies as $movie)
               <div class="col-lg-2">
+                <a href="{{ route('home.detailMovie' , $movie->id) }}" class="link-movie">
+
                   <div class="movie-card">
-                      <img src="{{ asset('storage/' . $movie->image) }}" alt="{{ $movie->title }}" class="movie-image">
-                      <h5 class="movie-title mt-4">{{ $movie->title }}</h5>
-                      <p class="year">{{ $movie->year }}</p>
+                    <img src="{{ asset('storage/' . $movie->image) }}" alt="{{ $movie->title }}" class="movie-image">
+                    <h5 class="movie-title mt-4">{{ $movie->title }}</h5>
+                    <p class="year">{{ $movie->year }}</p>
                   </div>
+                </a>
               </div>
           @endforeach
       </div>
@@ -76,6 +79,9 @@
   
     
     
+    </section>
+    <section class="about-me">
+
     </section>
 
     <section class="footer">

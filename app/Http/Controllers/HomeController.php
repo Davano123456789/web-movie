@@ -47,6 +47,10 @@ public function searchMovies(Request $request)
 
     return response()->json($movies);
 }
+public function detailMovie($id){
+    $movie = Movie::with('category')->find($id);
+    return view('home.detail-movie',compact('movie'));
 
+}
 
 }
