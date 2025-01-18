@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Models\Category;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -20,7 +22,9 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 
 // Halaman Utama (Home)
-Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth');
+Route::get('/', [HomeController::class, 'index'])->name('home.index')->middleware('auth');
+Route::get('/filter', [HomeController::class, 'filterMovies'])->name('home.filter');
+Route::get('/search', [HomeController::class, 'searchMovies'])->name('home.search');
 Route::middleware('auth.redirect')->group(function () {
     Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
     Route::post('/register', [AuthController::class, 'register'])->name('register');
@@ -37,4 +41,13 @@ Route::middleware(['auth', 'check.admin'])->group(function () {
     Route::post('/movies/add', [DashboardController::class, 'addMovie'])->name('movies.add');
     Route::delete('/movies/{id}', [DashboardController::class, 'destroy'])->name('movies.destroy');
     Route::get('/movies/{id}', [DashboardController::class, 'show'])->name('movies.show');
+    
+    // categories
+    Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
+    Route::delete('/category/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
+    Route::get('/categories/detail/{id}', [CategoryController::class, 'detail'])->name('category.detail');
+    Route::get('/categories/add', [CategoryController::class, 'formCategory'])->name('categories.add');
+    Route::post('/categories/add', [CategoryController::class, 'store'])->name('categories.store');
+
+    
 });

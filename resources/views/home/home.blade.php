@@ -19,6 +19,7 @@
                   <a class="link-nav" aria-current="page" href="#">Movies</a>
                   <a class="link-nav" aria-current="page" href="#">About me</a>
                   <a class="link-nav" aria-current="page" href="#">Services</a>
+                  <a class="link-nav logout" aria-current="page" href="{{ route('logout') }}">Logout</a>
 
                 </div>
               </div>
@@ -42,106 +43,39 @@
 </div>
 
     </section>
-    <section class="list-movie pb-5">
-      <div class="container">
-        <div class="categories">
-          <a href="#" class="active">All Movie</a>
-          <a href="#">Adventure</a>
-          <a href="#">Animation</a>
-          <a href="#">Biography</a>
-          <a href="#">Crime</a>
-          <a href="#">Comedy</a>
-          <a href="#">Documentary</a>
-          <a href="#">Drama</a>
-          <a href="#">Family</a>
-          <a href="#">Fantasy</a>
-          <a href="#">History</a>
-          <a href="#">Horror</a>
+    <section class="list-movie pb-5 pt-4">
+      <div class="search container">
+        <div class="input-group">
+            <span class="input-group-text">
+                <i class="fa fa-search"></i>
+            </span>
+            <input type="text" id="movie-search" class="form-control" placeholder="Search movies...">
         </div>
-        <div class="row g-4">
-          <!-- Movie 1 -->
-          <div class="col-lg-2 ">
-            <div class="movie-card">
-              <img src="../images/poster1.jpg" alt="Movie 1" class="movie-image">
-              <h5 class="movie-title mt-4">Movie Title 1</h5>
-              <p class="year">2015</p>
-            </div>
-          </div>
-          
-          <!-- Movie 2 -->
-          <div class="col-lg-2 ">
-            <div class="movie-card">
-              <img src="../images/poster2.jpg" alt="Movie 2" class="movie-image">
-              <h5 class="movie-title mt-4">Movie Title 2</h5>
-              <p class="year">2015</p>
-            </div>
-          </div>
-          
-          <!-- Movie 3 -->
-          <div class="col-lg-2 ">
-            <div class="movie-card">
-              <img src="../images/poster2.jpg" alt="Movie 3" class="movie-image">
-              <h5 class="movie-title mt-4">Movie Title 3</h5>
-              <p class="year">2015</p>
-            </div>
-          </div>
-          
-          <!-- Movie 4 -->
-          <div class="col-lg-2 ">
-            <div class="movie-card">
-              <img src="../images/poster3.jpg" alt="Movie 4" class="movie-image">
-              <h5 class="movie-title mt-4">Movie Title 4</h5>
-              <p class="year">2015</p>
-            </div>
-          </div>
-          
-          <!-- Movie 5 -->
-          <div class="col-lg-2 ">
-            <div class="movie-card">
-              <img src="../images/poster2.jpg" alt="Movie 5" class="movie-image">
-              <h5 class="movie-title mt-4">Movie Title 5</h5>
-              <p class="year">2015</p>
-            </div>
-          </div>
-          
-          <!-- Movie 6 -->
-          <div class="col-lg-2 ">
-            <div class="movie-card">
-              <img src="../images/poster2.jpg" alt="Movie 6" class="movie-image">
-              <h5 class="movie-title mt-4">Movie Title 6</h5>
-              <p class="year">2015</p>
-            </div>
-          </div>
-          <div class="col-lg-2  ">
-            <div class="movie-card">
-              <img src="../images/poster2.jpg" alt="Movie 6" class="movie-image">
-              <h5 class="movie-title mt-4">Movie Title 6</h5>
-              <p class="year">2015</p>
-            </div>
-          </div>
-          <div class="col-lg-2  ">
-            <div class="movie-card">
-              <img src="../images/poster2.jpg" alt="Movie 6" class="movie-image">
-              <h5 class="movie-title mt-4">Movie Title 6</h5>
-              <p class="year">2015</p>
-            </div>
-          </div>
-          <div class="col-lg-2">
-            <div class="movie-card">
-              <img src="../images/poster2.jpg" alt="Movie 6" class="movie-image">
-              <h5 class="movie-title mt-4">Movie Title 6</h5>
-              <p class="year">2015</p>
-            </div>
-          </div>
-          <div class="col-lg-2  ">
-            <div class="movie-card">
-              <img src="../images/poster2.jpg" alt="Movie 6" class="movie-image">
-              <h5 class="movie-title mt-4">Movie Title 6</h5>
-              <p class="year">2015</p>
-            </div>
-          </div>
-        </div>
+    </div>
+    
+    <div class="container">
+      <div class="categories">
+          <a href="#" data-category-id="" class="category-link active">All Movies</a>
+          @foreach ($categories as $category)
+              <a href="#" data-category-id="{{ $category->id }}" class="category-link">{{ $category->name }}</a>
+          @endforeach
       </div>
+  
+      <div class="row g-4" id="movie-container">
+          @foreach ($movies as $movie)
+              <div class="col-lg-2">
+                  <div class="movie-card">
+                      <img src="{{ asset('storage/' . $movie->image) }}" alt="{{ $movie->title }}" class="movie-image">
+                      <h5 class="movie-title mt-4">{{ $movie->title }}</h5>
+                      <p class="year">{{ $movie->year }}</p>
+                  </div>
+              </div>
+          @endforeach
+      </div>
+  </div>
+  
+    
+    
     </section>
 
     <section class="footer">
@@ -171,7 +105,7 @@
         <!-- Contact Column -->
         <div class="footer-col">
           <h3>Contact Us</h3>
-          <ul>
+          <ul >
             <li>Email: info@moviesite.com</li>
             <li>Phone: (123) 456-7890</li>
             <li>Address: Movie Street 123</li>
@@ -179,6 +113,122 @@
         </div>
       </div>
     </section>
-  
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Klik kategori
+            $('.category-link').click(function (e) {
+                e.preventDefault(); // Mencegah refresh halaman
+                const categoryId = $(this).data('category-id'); // Ambil ID kategori
+    
+                // Update styling aktif
+                $('.category-link').removeClass('active');
+                $(this).addClass('active');
+    
+                // AJAX request
+                $.ajax({
+                    url: "{{ route('home.filter') }}",
+                    type: "GET",
+                    data: { category_id: categoryId },
+                    success: function (response) {
+                        // Kosongkan container film
+                        $('#movie-container').empty();
+    
+                        // Periksa apakah ada film
+                        if (response.length === 0) {
+                            $('#movie-container').append('<p style="color:white;"">No movies found for this category.</p>');
+                        } else {
+                            // Tambahkan setiap film ke container
+                            response.forEach(movie => {
+                                $('#movie-container').append(`
+                                    <div class="col-lg-2">
+                                        <div class="movie-card">
+                                            <img src="/storage/${movie.image}" alt="${movie.title}" class="movie-image">
+                                            <h5 class="movie-title mt-4">${movie.title}</h5>
+                                            <p class="year">${movie.year}</p>
+                                        </div>
+                                    </div>
+                                `);
+                            });
+                        }
+                    },
+                    error: function () {
+                        alert('Error fetching movies. Please try again.');
+                    }
+                });
+            });
+        });
+
+        $(document).ready(function () {
+    // Variabel untuk menyimpan kategori yang dipilih
+    let selectedCategoryId = null;
+
+    // Klik kategori untuk filter
+    $('.category-link').click(function (e) {
+        e.preventDefault(); // Mencegah refresh halaman
+        const categoryId = $(this).data('category-id'); // Ambil ID kategori
+        
+        // Update kategori yang dipilih
+        selectedCategoryId = categoryId;
+
+        // Update styling kategori aktif
+        $('.category-link').removeClass('active');
+        $(this).addClass('active');
+        
+        // Panggil pencarian dengan kategori yang terpilih
+        searchMovies();
+    });
+
+    // Tangkap event input pada search box
+    $('#movie-search').on('input', function () {
+        // Panggil pencarian setiap kali ada perubahan input
+        searchMovies();
+    });
+
+    // Fungsi untuk mengirim request AJAX
+    function searchMovies() {
+        const query = $('#movie-search').val(); // Ambil nilai dari input search
+        
+        // AJAX request untuk filter berdasarkan kategori dan query pencarian
+        $.ajax({
+            url: "{{ route('home.search') }}",
+            type: "GET",
+            data: { 
+                query: query,
+                category_id: selectedCategoryId // Kirim kategori yang dipilih
+            },
+            success: function (response) {
+                // Kosongkan container film
+                $('#movie-container').empty();
+
+                // Periksa apakah ada film
+                if (response.length === 0) {
+                    $('#movie-container').append('<p style="color:white;">No movies found.</p>');
+                } else {
+                    // Tambahkan setiap film ke container
+                    response.forEach(movie => {
+                        $('#movie-container').append(`
+                            <div class="col-lg-2">
+                                <div class="movie-card">
+                                    <img src="/storage/${movie.image}" alt="${movie.title}" class="movie-image">
+                                    <h5 class="movie-title mt-4">${movie.title}</h5>
+                                    <p class="year">${movie.year}</p>
+                                </div>
+                            </div>
+                        `);
+                    });
+                }
+            },
+            error: function () {
+                alert('Error fetching movies. Please try again.');
+            }
+        });
+    }
+});
+
+
+        </script>
+
+    
 @endsection
 

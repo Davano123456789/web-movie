@@ -18,7 +18,7 @@ class DashboardController extends Controller
     }
     public function formMovie(){
         $categories = Category::all();
-        return view("admin.formMovie",compact("categories"));
+        return view("admin.form-movie",compact("categories"));
     }
     public function addMovie(Request $request)
 {
@@ -68,7 +68,7 @@ public function destroy($id){
 public function show($id)
 {
     $movie = Movie::with('category')->findOrFail($id);
-    return view('admin.detail-category', compact('movie'));
+    return view('admin.detail-movie', compact('movie'));
 }
 
 public function editMovie($id){
