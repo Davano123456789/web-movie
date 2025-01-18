@@ -25,6 +25,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 Route::get('/', [HomeController::class, 'index'])->name('home.index')->middleware('auth');
 Route::get('/filter', [HomeController::class, 'filterMovies'])->name('home.filter');
 Route::get('/search', [HomeController::class, 'searchMovies'])->name('home.search');
+Route::get('/detailMovie/{id}', [HomeController::class, 'detailMovie'])->name('home.detailMovie');
 Route::middleware('auth.redirect')->group(function () {
     Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
     Route::post('/register', [AuthController::class, 'register'])->name('register');
