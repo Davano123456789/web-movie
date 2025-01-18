@@ -18,7 +18,7 @@ a.btn-header{
     background-position: center;
 }
 .navbar-nav{
-    margin-left: 25rem;
+    margin-left: 18rem;
 }
 a.link-nav {
     color: white;
@@ -27,7 +27,12 @@ a.link-nav {
     position: relative;
     display: inline-block;
 }
-
+a.logout{
+  padding: 0.2rem 1rem;
+  background-color: red;
+  border-radius: 20px;
+  font-weight: 600;
+}
 a.link-nav::after {
     content: '';
     position: absolute;
@@ -65,8 +70,8 @@ a.link-nav.aktif::after {
 .row {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 20px;
+
+    gap: 45px;
 }
 
 /* Col-6 Styling */
@@ -277,7 +282,52 @@ h1.welcome {
   .footer-col ul li a:hover {
     color: #ffffff;
   }
+  /* Styling search container */
+.search {
+  display: flex;
+margin-bottom: -3rem;
   
+}
+
+/* Styling input group */
+.input-group {
+  display: flex;
+  align-items: center;
+  border-radius: 30px;
+  border: 2px solid #ddd;
+  overflow: hidden;
+  width: 100%;
+  max-width: 350px;
+  transition: all 0.3s ease;
+}
+
+/* Styling search icon */
+.input-group-text {
+  background-color: #fff;
+  border: none;
+  padding: 10px 15px;
+  color: #aaa;
+  font-size: 18px;
+}
+
+/* Styling search input */
+.input-group input {
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  outline: none;
+  width: 100%;
+  border-radius: 0;
+  outline: none;
+}
+
+/* Styling placeholder */
+.input-group input::placeholder {
+  color: #aaa;
+  font-style: italic;
+}
+
+
   /* Responsive Design */
   @media (max-width: 768px) {
     .footer-container {

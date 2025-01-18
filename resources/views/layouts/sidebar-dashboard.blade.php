@@ -28,7 +28,7 @@
             
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="../pages/billing.html">
+          <a  class="nav-link {{ Request::routeIs('categories') ? 'active' : '' }}" href="{{ route('categories') }}">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="fas fa-list text-dark text-sm opacity-10"></i>
             </div>
@@ -44,11 +44,11 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="../pages/rtl.html">
+          <a class="nav-link " href="{{ route('logout') }}" style="color:red;">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-world-2 text-dark text-sm opacity-10"></i>
+              <i class="fas fa-sign-out-alt" style="color: red"></i> 
             </div>
-            <span class="nav-link-text ms-1">RTL</span>
+            <span class="nav-link-text ms-1">Logout</span>
           </a>
         </li>
       </ul>
