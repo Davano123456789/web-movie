@@ -19,7 +19,12 @@
                   <a class="link-nav" aria-current="page" href="#movies">Movies</a>
                   <a class="link-nav" aria-current="page" href="#">About me</a>
                   <a class="link-nav" aria-current="page" href="#">Services</a>
+                  @if (auth()->user() && auth()->user()->id === 1)
+                  <a class="link-nav dashboard" href="{{ route('dashboard') }}">Dashboard</a>
+              @else
                   <a class="link-nav logout" aria-current="page" href="{{ route('logout') }}">Logout</a>
+              @endif
+              
 
                 </div>
               </div>
@@ -213,12 +218,16 @@
                 } else {
                     // Tambahkan setiap film ke container
                     response.forEach(movie => {
+                        const detailRoute = "{{ route('home.detailMovie', ':id') }}".replace(':id', movie.id); // Buat rute detail
+
                         $('#movie-container').append(`
                             <div class="col-lg-2">
                                 <div class="movie-card">
-                                    <img src="/storage/${movie.image}" alt="${movie.title}" class="movie-image">
-                                    <h5 class="movie-title mt-4">${movie.title}</h5>
-                                    <p class="year">${movie.year}</p>
+                                    <a href="${detailRoute}">
+                                        <img src="/storage/${movie.image}" alt="${movie.title}" class="movie-image">
+                                        <h5 class="movie-title mt-4">${movie.title}</h5>
+                                        <p class="year">${movie.year}</p>
+                                    </a>
                                 </div>
                             </div>
                         `);

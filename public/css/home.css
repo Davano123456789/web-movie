@@ -22,7 +22,7 @@ a.btn-header{
     background-position: center;
 }
 .navbar-nav{
-    margin-left: 18rem;
+    margin-left: 16rem;
 }
 a.link-nav {
     color: white;
@@ -34,6 +34,12 @@ a.link-nav {
 a.logout{
   padding: 0.2rem 1rem;
   background-color: red;
+  border-radius: 20px;
+  font-weight: 600;
+}
+a.dashboard{
+  padding: 0.2rem 1rem;
+  background-color: rgb(25, 0, 255);
   border-radius: 20px;
   font-weight: 600;
 }

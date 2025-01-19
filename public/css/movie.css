@@ -37,3 +37,83 @@
     cursor: pointer;
     outline: none;
 }
+.pagination {
+    margin-left: 20px;
+}
+.search-movies-dashboard {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+  margin-bottom: 1rem;
+  }
+  
+  .search-form {
+    width: 100%;
+    max-width: 300px;
+    position: relative;
+  }
+  
+  .input-container {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    padding: 10px 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .input-container i {
+    color: #888;
+    margin-right: 10px;
+    font-size: 16px;
+  }
+  
+  .input-container input {
+    border: none;
+    outline: none;
+    flex-grow: 1;
+    font-size: 14px;
+    color: #555;
+    background: transparent;
+  }
+  
+  .input-container input::placeholder {
+    color: #aaa;
+  }
+  
+  /* Add hover and focus effects */
+  .input-container:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  .input-container input:focus {
+    border-color: #aaa;
+  }
+  
+  /* Optional: Add responsive behavior */
+  @media (max-width: 768px) {
+    .search-form {
+      max-width: 100%;
+      padding: 0 10px;
+    }
+  }
+  
+
+.pagination .page-item .page-link {
+    border-radius: 50%;
+    color: #6c757d;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #3b28a7;
+    border-color: #3b28a7;
+    color: #fff;
+}
+
+.pagination .page-item:hover .page-link {
+    background-color: #e9ecef;
+    color: #3b28a7;
+}

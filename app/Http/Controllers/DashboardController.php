@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Movie;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -10,12 +11,24 @@ use Illuminate\Support\Facades\Storage;
 class DashboardController extends Controller
 {
     public function index(){
-        return view("admin.dashboard");
+        $totalMovies = Movie::count();
+        $totalCategories = Category::count();
+        $totalUsers = User::count();
+        return view("admin.dashboard",compact(["totalMovies",'totalCategories','totalUsers']));
     }
-    public function movies(){
-        $movies = Movie::all();
-        return view("admin.movies", compact("movies"));
-    }
+    public function movies(Request $request)
+{
+    $query = $request->input('search');
+
+    // Query untuk pencarian
+    $movies = Movie::when($query, function ($q) use ($query) {
+        $q->where('title', 'like', "%{$query}%")
+          ->orWhere('description', 'like', "%{$query}%");
+    })->paginate(5);
+
+    return view('admin.movies', compact('movies'));
+}
+
     public function formMovie(){
         $categories = Category::all();
         return view("admin.form-movie",compact("categories"));

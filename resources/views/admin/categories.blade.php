@@ -5,6 +5,14 @@
 @section('content-dashboard')
 <link rel="stylesheet" href="../css/movie.css">
 <div class="row">
+  <div class="search-movies-dashboard">
+    <form action="{{ route('categories') }}" method="GET" class="search-form">
+      <div class="input-container">
+        <i class="fas fa-search"></i>
+        <input type="text" name="search" value="{{ request('search') }}" placeholder="Search movies..." />
+      </div>
+    </form>
+  </div>
     <div class="col-12">
       <div class="card mb-4">
         <div class="card-header pb-0">
@@ -40,7 +48,7 @@
                     <td>
                         <div class="d-flex px-2 py-1">
                             <div class="d-flex flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm">{{ $loop->iteration }}</h6>
+                                <h6 class="mb-0 text-sm">{{ $loop->iteration + ($categories->currentPage() - 1) * $categories->perPage() }}</h6>
                             </div>
                         </div>
                     </td>
@@ -72,6 +80,12 @@
 
               </tbody>
             </table>
+            <div class="d-flex justify-content-between align-items-center mt-4 ms-4">
+              <!-- Pagination -->
+              <nav aria-label="Page navigation example">
+                  {{ $categories->links('pagination::bootstrap-5') }}
+              </nav>
+          </div>
           </div>
         </div>
       </div>
