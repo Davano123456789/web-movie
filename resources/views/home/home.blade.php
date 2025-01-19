@@ -20,9 +20,9 @@
                   <a class="link-nav" aria-current="page" href="#">About me</a>
                   <a class="link-nav" aria-current="page" href="#">Services</a>
                   @if (auth()->user() && auth()->user()->id === 1)
-                  <a class="link-nav dashboard" href="{{ route('dashboard') }}">Dashboard</a>
+                  <a class=" dashboard text-white text-decoration-none" href="{{ route('dashboard') }}" style="border-bottom: none">Dashboard</a>
               @else
-                  <a class="link-nav logout" aria-current="page" href="{{ route('logout') }}">Logout</a>
+                  <a class="text-white text-decoration-none logout" aria-current="page" href="{{ route('logout') }}">Logout</a>
               @endif
               
 
