@@ -1,11 +1,12 @@
 <?php
 
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
-use App\Models\Category;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -49,6 +50,7 @@ Route::middleware(['auth', 'check.admin'])->group(function () {
     Route::get('/categories/detail/{id}', [CategoryController::class, 'detail'])->name('category.detail');
     Route::get('/categories/add', [CategoryController::class, 'formCategory'])->name('categories.add');
     Route::post('/categories/add', [CategoryController::class, 'store'])->name('categories.store');
-
     
+    // users
+    Route::get('/listUser', [UserController::class, 'index'])->name('listUser');
 });
